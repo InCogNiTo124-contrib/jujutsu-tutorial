@@ -4,66 +4,81 @@ We're done with our first commit, and we're ready to do more work. Let's start
 that work by using `jj new`:
 
 ```console
-$ jj new
-Working copy now at: puomrwxl 01a35aad (empty) (no description set)
-Parent commit      : yyrsmnoo ac691d85 hello world
+$ (~/bak) jj new
+Working copy now at: upvquvzp 493054a9 (empty) (no description set)
+Parent commit      : mqxqrzlm 69e3b8b0 bak version 1
 ```
 
-It's that easy! We now have a new change, `puomrwxl`, that's empty and has
-no description. But its parent is our previous change, `yyrsmnoo`.
+It's that easy!
 
-Let's check out `jj st`:
+We now have a new change, `upvquvzp`, that's empty and has no description. But its parent is our previous change, `mqxqrzlm`. Let's check out `jj st`:
 
 ```console
-$ jj st
+$ (~/bak) jj st
 The working copy is clean
-Working copy : puomrwxl 01a35aad (empty) (no description set)
-Parent commit: yyrsmnoo ac691d85 hello world
+Working copy : upvquvzp 493054a9 (empty) (no description set)
+Parent commit: mqxqrzlm 69e3b8b0 bak version 1
 ```
 
-Nice, a clean working directory: all of our changes were made in `yyrsmnoo`, and
+Nice, a clean working directory: all of our changes were made in `mqxqrzlm`, and
 we're starting this change fresh.
 
 We now technically have a very primitive, but near-complete, workflow. That's
-really all you need to know to get started. To practice, let's make another
+_really_ all you need to know to get started. To practice, let's make another
 change. This time, I'm going to describe things first, before I make any changes:
 
 ```console
-> jj describe -m "it's important to comment our code"
-Working copy now at: puomrwxl a0f0bc71 (empty) it's important to comment our code
-Parent commit      : yyrsmnoo ac691d85 hello world
+$ (~/bak) jj describe -m "it's important to comment our code"
+Working copy now at: upvquvzp 232e1d84 (empty) it's important to comment our code
+Parent commit      : mqxqrzlm 69e3b8b0 bak version 1
 ```
 
 Just what we expected, still an empty change, but with a description, and our
 commit ID has updated while the change ID stays the same.
 
-Let's modify `src/main.rs`:
+Let's modify `bak.py`:
 
-```rust
-/// A "Hello, world!" program.
+```python
+import sys
 
-fn main() {
-    println!("Hello, world!");
-}
+def main():
+    print('bat - a simple backup tool')
+    # show help if no args
+    if len(sys.argv) == 1:
+        print('Usage: bat [file]')
+        sys.exit(1)
+    filename = sys.argv[1]
+
+    # figure out the name of the backup
+    backup_filename = filename + '.bak'
+    
+    # write the content byte-for-byte
+    with open(backup_filename, 'w') as file_write:
+        with open(filename, 'r') as file_read:
+            file_write.write(file_read.read())
+    return
+
+if __name__ == "__main__":
+    main()
 ```
 
 We can double check that `jj` has noticed our change:
 
 ```console
-$ jj st
+$ (~/bak) jj st
 Working copy changes:
-M src\main.rs
-Working copy : puomrwxl 7a096b8a it's important to comment our code
-Parent commit: yyrsmnoo ac691d85 hello world
+M bak.py
+Working copy : upvquvzp 886439f9 it's important to comment our code
+Parent commit: mqxqrzlm 69e3b8b0 bak version 1
 ```
 
-Excellent, `src\main.rs` has been `M`odified, we have a new commit ID. Since
+Excellent, `bak.py` has been `M`odified, we have a new commit hash. Since
 we're done with this change, let's start a new one:
 
 ```console
-$ jj new
-Working copy now at: ywnkulko 46b50ed7 (empty) (no description set)
-Parent commit      : puomrwxl 7a096b8a it's important to comment our code
+$ (~/bak) jj new
+Working copy now at: mmxtwkxv 3e0ff705 (empty) (no description set)
+Parent commit      : upvquvzp 886439f9 it's important to comment our code
 ```
 
 Wonderful.

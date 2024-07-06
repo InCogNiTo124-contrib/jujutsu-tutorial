@@ -11,3 +11,10 @@ commands, we can have nicer workflows that let us work a bit more naturally.
 We'll start with the "squash workflow," as it is the workflow that Martin
 himself prefers. We'll then talk about the "edit workflow," which is popular
 among people who don't like the squash workflow.
+
+<hr/>
+
+Workflow is mostly complete but we'll introduce some indispensable commands.
+Note that these workflows are not mandated at all; but, it's what people have settled on and feel most comfortable with
+
+In this chapter, we'll expand `bak` utility to support multiple files provided through the CLI as arguments.
