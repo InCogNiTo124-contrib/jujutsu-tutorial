@@ -2,11 +2,10 @@
 
 So here is our current workflow:
 
-1. Create new repositories with `jj git init`.
-2. To start working on a new change, use `jj new`.
-3. To describe a change so humans can understand them, use `jj describe`.
-4. We can look at our work with `jj st`.
-5. When we're done, we can start our next change with `jj new`.
+1. To start working on a new change, use `jj new`.
+2. To describe a change so humans can understand them, use `jj describe`.
+3. We can look at our work with `jj st`.
+4. When we're done, we can start our next change with `jj new`.
 
 Finally, we can review our repository's contents with `jj log`.
 

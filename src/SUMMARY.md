@@ -1,10 +1,11 @@
 # Summary
 
-- [Introduction](introduction/introduction.md)
-    - [What is jj and why should I care?](introduction/what-is-jj-and-why-should-i-care.md)
+- [Foreword](introduction/what-is-jj-and-why-should-i-care.md)
+    - [Introduction - Steve Klabnik](introduction/introduction.md)
+    - [Introduction - Marijan Smetko](introduction/introduction-ms.md)
     - [How to read this tutorial](introduction/how-to-read.md)
+    - [Setup and project](introduction/project.md)
 - [Hello, world!](hello-world/hello-world.md)
-    - [How to install `jj`](hello-world/how-to-install.md)
     - [Creating a repository with `jj git init`](hello-world/creating-a-repository.md)
     - [Viewing the current status with `jj st`](hello-world/viewing-the-current-status.md)
     - [Using `jj describe` to describe our commits in a human-friendly way](hello-world/describing-commits.md)
@@ -13,7 +14,10 @@
     - [A recap and some thoughts](hello-world/recap.md)
 - [Real-world workflows](real-world-workflows/intro.md)
     - [The Squash Workflow](real-world-workflows/the-squash-workflow.md)
-    - [The Edit Workflow](real-world-workflows/the-edit-workflow.md)
+    - [The Edit Workflow](real-world-workflows/the-edit-workflow.md) <br/> <hr/>
+    - [The Edit Workflow (MS)](real-world-workflows/the-edit-workflow-ms.md)
+    - [Intermezzo: the `jj undo` command](real-world-workflows/undo.md)
+    - [The Squash Workflow (MS) aa ](real-world-workflows/the-squash-workflow-ms.md)
 
 - [Branching, merging, and conflicts](branching-merging-and-conflicts/intro.md)
     - [What anonymous branches are, and how to use them](branching-merging-and-conflicts/anonymous-branches.md)

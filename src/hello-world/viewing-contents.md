@@ -3,13 +3,13 @@
 Let's look at our chain of changes:
 
 ```console
-> jj log
-@  ywnkulko steve@steveklabnik.com 2024-02-28 20:40:00.000 -06:00 46b50ed7
+$ (~/bak) jj log
+@  zztxmsww codelab@example.com 2024-07-07 01:39:30 086a6fa4
 │  (empty) (no description set)
-◉  puomrwxl steve@steveklabnik.com 2024-02-28 20:38:13.000 -06:00 7a096b8a
+◉  upvquvzp codelab@example.com 2024-07-06 21:19:45 886439f9
 │  it's important to comment our code
-◉  yyrsmnoo steve@steveklabnik.com 2024-02-28 20:24:56.000 -06:00 ac691d85
-│  hello world
+◉  mqxqrzlm codelab@example.com 2024-07-06 21:19:45 69e3b8b0
+│  bak version 1
 ◉  zzzzzzzz root() 00000000
 ```
 
@@ -41,18 +41,19 @@ One more thing: my text representation of the output of `jj log` was missing
 something. Here's a screenshot of my terminal, and you may notice something
 interesting:
 
-![colorized output in jj log](../images/log.png)
+![colorized output in jj log](../images/jj-log.png)
 
 The output has color, and a lot of it! But the most important bit is the
-highlights in the revision IDs and commit IDs. See how `yw` is in magenta,
-but the rest of the ID is in grey, `nkulko`? Similar to `git`, when talking
+highlights in the revision IDs and commit IDs. See how `zzt` is in magenta,
+but the rest of the ID is in grey, `xmsww`? Similar to `git`, when talking
 about an ID, you only need to refer to the unique prefix, and not the whole ID.
 So that magenta bit is showing you said prefix; we could run commands that
-refer to `ywnkulko` or `yw` and they'd both work. Why is it two characters? Well,
-because we also have `yyrsmnoo`. But see how the middle change, `p` is the
-prefix and `uomrwxl` is in grey? Because this is the only change that starts with
-`p`. But since we have two commits starting with `y`, we need a second character
-to make them unique.
+refer to `zztxmsww` or `zzt` and they'd both work. Why is it two characters? Well,
+because we also have `zzzzzzzz`[^root] . But see how the middle change, `u` is the
+prefix and `pvquvzp` is in grey? Because this is the only change that starts with
+`u`. But since we have two commits starting with `z`, we need the second and the third
+character to make them unique. And, by a pure stroke of luck, you can also see that the
+same holds for the commit hashes.
 
 It's very cool that the UI is communicating this to us! And, it's also why the
 format of change IDs is pretty cool: by using letters, there are less likely to
@@ -62,3 +63,7 @@ grows pretty large.
 There are many more secrets to `jj log`, but for now, this is enough to be
 able to go back and look at all of your changes, so we're gonna keep it
 there. Let's recap what we've learned.
+
+<hr/>
+
+[^root]: Not that we could do anything with the `root()` commit &ndash; it's immutable
