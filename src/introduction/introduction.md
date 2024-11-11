@@ -1,4 +1,4 @@
-# Introduction
+# Introduction - Steve Klabnik
 
 Hi there, I'm [Steve][steve]. This is a tutorial for [Jujutsu—a version control
 system][jj].

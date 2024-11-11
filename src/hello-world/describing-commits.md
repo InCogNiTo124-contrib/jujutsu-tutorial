@@ -1,36 +1,52 @@
 # Using `jj describe` to describe our commits in a human-friendly way
 
-While we can refer to our changes by their change ID or commit ID, that's not
+While we can refer to our changes by their change ID or commit hash, that's not
 always great. Text is a much better way to describe things for humans.
 
 However, before we can describe commits, we have to let `jj` know who we are.
 Let's set some quick configuration:
 
 ```console
-$ jj config set --user user.name "Steve Klabnik"
-$ jj config set --user user.email "steve@steveklabnik.com"
+$ (~/bak) jj config set --user user.name "Code Lab"
+$ (~/bak) jj config set --user user.email "codelab@example.com"
 ```
 
-Obviously, unless you're me, you should be putting your own name and email in
-there. Okay, with that out of the way, we're ready to describe some changes.
+Okay, with that out of the way, we're ready to describe our changes.
 
-Whenever we feel like it, we can describe our changes with `jj describe`.
+What changes? Sometimes, us developers want to preview all the changes that were made.
+This is made possible by the `jj diff` command:
+```console
+$ (~/bak) jj diff
+bak.py --- Python
+ 1 import sys
+ 2
+ 3 def main():
+ 4     print('bat - a simple backup tool')
+ 5     if len(sys.argv) == 1:
+ 6         print('Usage: bat <command> [<args>]')
+ 7         sys.exit(1)
+ 8     filename = sys.argv[1]
+ 9     backup_filename = filename + '.bak'
+10     with open(backup_filename, 'w') as file_write:
+11         with open(filename, 'r') as file_read:
+12             file_write.write(file_read.read())
+13     return
+14
+15 if __name__ == "__main__":
+16     main()
+```
+
+Whenever we feel like it[^whenever], we can describe our changes with `jj describe`.
 The simplest way to use it is with the `-m`, or "message" flag. This allows us
 to pass the description on the command line:
 
 ```console
-$ jj describe -m "hello world!"
-Working copy now at: yyrsmnoo 524d2bf4 hello world
+$ (~/bak) jj describe -m "bak version 1"
+Working copy now at: mqxqrzlm 6d3840e5 (no description set)')
 Parent commit      : zzzzzzzz 00000000 (empty) (no description set)
 ```
 
-(You may notice that the change ID changed here: that's just some book-writing
-magic. I am editing this book manually, and so may make adjustments that end up
-giving you different change IDs and commit IDs than I do. You'll figure it out,
-just match the output of your commands to the inputs you give and you'll be
-fine.)
-
-Our message, `hello world`, has replaced the `(no description set)` text. We're
+Our message, `bak version 1`, has replaced the `(no description set)` text. We're
 gonna be able to see this whenever we look at our repository history.
 
 For more real changes though, you'll probably want to not use the `-m` flag.
@@ -38,30 +54,28 @@ And, since descriptions can be set at any time, we can also change them too.
 Let's try it again:
 
 ```console
-$ jj describe
+$ (~/bak) jj describe
 ```
 
-An editor will pop up; I'm on Windows, so I'm getting notepad.
+An editor will pop up; if you're on Windows, you're getting Notepad. If you're on *nix, you'll get your `$EDITOR`.
 
-![notepad](../images/describe.png)
+![notepad](../images/describe-2.png)
 
-This window shows my original message, "hello world," and then
+This window shows my original message, "bak version 1" and then
 a bunch of lines that start with `JJ: `. As the final one mentions,
 these lines are ignored when forming the commit description. So let's
 make a longer description, like this:
 
 ```text
-hello world
+bak version 1
 
-This is an initial "Hello, world!" implementation, nothing fancy.
+This is an initial implementation, nothing fancy.
+It reads single file from the args list and backs it up.
 
 More fun stuff to come.
 
 JJ: This commit contains the following changes:
-JJ:     A .gitignore
-JJ:     A Cargo.lock
-JJ:     A Cargo.toml
-JJ:     A src\main.rs
+JJ:     A bak.py
 
 JJ: Lines starting with "JJ: " (like this one) will be removed.
 ```
@@ -69,23 +83,20 @@ JJ: Lines starting with "JJ: " (like this one) will be removed.
 After saving and closing, we'll get this output:
 
 ```console
-Working copy now at: yyrsmnoo ac691d85 hello world
+Working copy now at: mqxqrzlm 69e3b8b0 bak version 1
 Parent commit      : zzzzzzzz 00000000 (empty) (no description set)
 ```
 
-We only see that first line, but the rest are still there.
-
-Eagle eyed readers may notice one other change. Let's take two of these outputs
-and put them next to each other:
-
-```text
-Working copy now at: yyrsmnoo 524d2bf4 hello world
-Working copy now at: yyrsmnoo ac691d85 hello world
-```
-
-Changing our description changed the commit ID! This is why we have both IDs:
-the change ID has not changed, but the commit ID has. This allows us to evolve
+Take a note of the commit hash. Changing our description also changed the commit hash, just like in `git`. But, the change ID is still the same. This is why we have both
+the change ID, which has not changed, and the commit hash that has. This allows us to evolve
 our commit over time, but still have a stable way to refer to all versions of it.
 
-We will come back to this more in the future, because first, I'd like to show
-you how to make new changes.
+This change is pretty much done - we implemented the functionality and gave the change a description. Time to make new changes!
+
+## Summary
+
+* Use `jj describe` to give or modify the description of the current change in any point in time
+
+<hr/>
+
+[^whenever]: I truly mean whenever. If you stacked `N` more commits in your unpublished project and then noticed a typo, you can easily fix it with `jj describe` and all the commits would be rebased _automatically_ - good luck doing that with git. We'll see an example later on.
